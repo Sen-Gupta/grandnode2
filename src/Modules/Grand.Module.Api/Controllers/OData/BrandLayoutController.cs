@@ -43,7 +43,7 @@ public class BrandLayoutController : BaseODataController
 
     [SwaggerOperation("Get entities from BrandLayout", OperationId = "GetBrandLayouts")]
     [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()

@@ -43,7 +43,7 @@ public class ShippingMethodController : BaseODataController
 
     [SwaggerOperation("Get entities from ShippingMethod", OperationId = "GetShippingMethods")]
     [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()

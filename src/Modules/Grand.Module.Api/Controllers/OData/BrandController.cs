@@ -7,10 +7,10 @@ using Grand.Domain.Catalog;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.AspNetCore.OData;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using Grand.Module.Api.Constants;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace Grand.Module.Api.Controllers.OData;
 
@@ -29,7 +29,7 @@ public class BrandController : BaseODataController
 
     [SwaggerOperation("Get entities from Brand", OperationId = "GetBrands")]
     [HttpGet]
-    [MongoEnableQuery]
+    [EnableQuery]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()
