@@ -37,7 +37,7 @@ public class CustomerController : BaseODataController
     }
 
     [SwaggerOperation("Get entity from Customer by email", OperationId = "GetCustomerByEmail")]
-    [HttpGet]
+    [HttpGet("{email}")] 
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
