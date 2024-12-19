@@ -4,13 +4,10 @@ services:
   grand.web:
     image: ${DOCKER_REGISTRY-}grandnode/grandnode2:latest
     ports:
-      - 80
-      - 443
+      - 5010:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=a2091e37-94a0-4446-8a5d-1d5c0835333a
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_URLS=http://+:80 
     volumes:
       - ~/.aspnet/https:/https:ro
     build:
@@ -20,3 +17,5 @@ services:
       - "db"
   db:
     image: mongo
+    ports:
+        - 27017:27017
