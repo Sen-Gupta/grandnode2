@@ -43,7 +43,7 @@ public class DeliveryDateController : BaseODataController
 
     [SwaggerOperation("Get entities from Delivery Date", OperationId = "GetDeliveryDates")]
     [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()

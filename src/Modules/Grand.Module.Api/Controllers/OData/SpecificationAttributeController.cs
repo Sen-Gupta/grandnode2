@@ -46,7 +46,7 @@ public class SpecificationAttributeController : BaseODataController
 
     [SwaggerOperation("Get entities from SpecificationAttribute", OperationId = "GetSpecificationAttributes")]
     [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()

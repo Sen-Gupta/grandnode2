@@ -43,7 +43,7 @@ public class PickupPointController : BaseODataController
 
     [SwaggerOperation("Get entities from PickupPoint", OperationId = "GetPickupPoints")]
     [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()

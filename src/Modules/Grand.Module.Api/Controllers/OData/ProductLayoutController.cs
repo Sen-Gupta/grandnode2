@@ -43,7 +43,7 @@ public class ProductLayoutController : BaseODataController
 
     [SwaggerOperation("Get entities from ProductTemplate", OperationId = "GetProductTemplates")]
     [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()

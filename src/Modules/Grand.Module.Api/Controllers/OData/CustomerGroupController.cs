@@ -45,7 +45,7 @@ public class CustomerGroupController : BaseODataController
 
     [SwaggerOperation("Get entities from CustomerGroup", OperationId = "GetCustomerGroups")]
     [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [EnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> Get()
