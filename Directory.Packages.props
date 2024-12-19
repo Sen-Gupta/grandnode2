@@ -4,14 +4,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="MaxMind.GeoIP2" Version="5.2.0" />
-    <PackageVersion Include="ExcelMapper" Version="5.2.593" />
+    <PackageVersion Include="ExcelMapper" Version="5.2.594" />
     <PackageVersion Include="Microsoft.FeatureManagement.AspNetCore" Version="4.0.0" />
     <PackageVersion Include="NPOI" Version="2.7.2" />
     <PackageVersion Include="Scryber.Core" Version="6.0.4-beta" />
     <PackageVersion Include="Scryber.Core.OpenType" Version="6.1.0-beta" />
     <PackageVersion Include="MailKit" Version="4.9.0" />
-    <PackageVersion Include="AWSSDK.Core" Version="3.7.400.63" />
-    <PackageVersion Include="AWSSDK.S3" Version="3.7.410.5" />
+    <PackageVersion Include="AWSSDK.Core" Version="3.7.400.66" />
+    <PackageVersion Include="AWSSDK.S3" Version="3.7.410.8" />
     <PackageVersion Include="Azure.Storage.Blobs" Version="12.23.0" />
     <PackageVersion Include="SkiaSharp" Version="3.116.1" />
     <PackageVersion Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.116.1" />
@@ -21,8 +21,8 @@
     <PackageVersion Include="DotLiquid" Version="2.3.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageVersion Include="GoogleAuthenticator" Version="3.2.0" />
-    <PackageVersion Include="MassTransit" Version="8.3.3" />
-    <PackageVersion Include="MassTransit.RabbitMQ" Version="8.3.3" />
+    <PackageVersion Include="MassTransit" Version="8.3.4" />
+    <PackageVersion Include="MassTransit.RabbitMQ" Version="8.3.4" />
     <PackageVersion Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
     <PackageVersion Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="8.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
@@ -34,7 +34,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.12.0" />
     <PackageVersion Include="MediatR" Version="12.4.1" />
     <PackageVersion Include="Scrutor" Version="5.0.2" />
-    <PackageVersion Include="StackExchange.Redis" Version="2.8.22" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.8.24" />
     <PackageVersion Include="FluentValidation" Version="11.11.0" />
     <PackageVersion Include="Microsoft.AspNetCore.JsonPatch" Version="9.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.0" />
@@ -46,7 +46,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.Google" Version="9.0.0" />
     <PackageVersion Include="Braintree" Version="5.28.0" />
     <PackageVersion Include="System.Xml.XPath.XmlDocument" Version="4.7.0" />
-    <PackageVersion Include="Stripe.net" Version="47.1.0" />
+    <PackageVersion Include="Stripe.net" Version="47.2.0" />
     <PackageVersion Include="elFinder.Net.AspNetCore" Version="1.5.0" />
     <PackageVersion Include="elFinder.Net.Core" Version="1.5.0" />
     <PackageVersion Include="elFinder.Net.Drivers.FileSystem" Version="1.5.0" />
@@ -64,6 +64,6 @@
     <PackageVersion Include="MSTest.TestAdapter" Version="3.6.4" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.6.4" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
-    <PackageVersion Include="NUnit" Version="4.2.2" />
+    <PackageVersion Include="NUnit" Version="4.3.0" />
   </ItemGroup>
 </Project>
