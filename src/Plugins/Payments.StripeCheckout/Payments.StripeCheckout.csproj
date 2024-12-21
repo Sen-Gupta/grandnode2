@@ -15,12 +15,19 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Properties\**" />
+      <Content Remove="Properties\**" />
+      <EmbeddedResource Remove="Properties\**" />
+      <None Remove="Properties\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Stripe.net" />
     </ItemGroup>
 
     <Target Name="CopyFile" AfterTargets="AfterBuild">
         <ItemGroup>
-            <CopyFiles Include="$(NuGetPackageRoot)\stripe.net\47.1.0\lib\net8.0\*.*" />
+            <CopyFiles Include="$(NuGetPackageRoot)\stripe.net\47.2.0\lib\net9.0\*.*" />
         </ItemGroup>
         <Copy SourceFiles="@(CopyFiles)" DestinationFolder="..\..\Web\Grand.Web\Plugins\Payments.StripeCheckout\" />
     </Target>
@@ -51,10 +58,6 @@
         <None Update="logo.jpg">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Properties\" />
     </ItemGroup>
     
 </Project>
