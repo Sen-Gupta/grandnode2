@@ -46,7 +46,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.Google" Version="9.0.0" />
     <PackageVersion Include="Braintree" Version="5.28.0" />
     <PackageVersion Include="System.Xml.XPath.XmlDocument" Version="4.7.0" />
-    <PackageVersion Include="Stripe.net" Version="47.1.0" />
+    <PackageVersion Include="Stripe.net" Version="47.2.0" />
     <PackageVersion Include="elFinder.Net.AspNetCore" Version="1.5.0" />
     <PackageVersion Include="elFinder.Net.Core" Version="1.5.0" />
     <PackageVersion Include="elFinder.Net.Drivers.FileSystem" Version="1.5.0" />
