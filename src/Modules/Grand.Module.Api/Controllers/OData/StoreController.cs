@@ -10,6 +10,9 @@ using MongoDB.AspNetCore.OData;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using Grand.Module.Api.Constants;
+using Grand.Module.Api.Commands.Models.Store;
+using Grand.Module.Api.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace Grand.Module.Api.Controllers.OData;
 
@@ -41,6 +44,8 @@ public class StoreController : BaseODataController
         return Ok(store.FirstOrDefault());
     }
 
+
+
     [SwaggerOperation("Get entities from Store", OperationId = "GetStores")]
     [HttpGet]
     [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
@@ -51,5 +56,19 @@ public class StoreController : BaseODataController
         if (!await _permissionService.Authorize(PermissionSystemName.Stores)) return Forbid();
 
         return Ok(await _mediator.Send(new GetGenericQuery<StoreDto, Store>()));
+    }
+
+    [SwaggerOperation("Adds a new store", OperationId = "InsertStore")]
+    [HttpPost]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> Post([FromBody] StoreDto model)
+    {
+        //Assign the host and store url
+        model = FieldsExtensions.ManageClinicConfigurations(HttpContext.Request, model);
+        if (!await _permissionService.Authorize(PermissionSystemName.Stores)) return Forbid();
+        model = await _mediator.Send(new AddStoreCommand { Model = model });
+        return Ok(model);
     }
 }
