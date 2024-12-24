@@ -117,7 +117,10 @@ public class MongoRepository<T> : IRepository<T> where T : BaseEntity
     public virtual async Task<T> InsertAsync(T entity)
     {
         entity.CreatedOnUtc = _auditInfoProvider.GetCurrentDateTime();
-        entity.CreatedBy = _auditInfoProvider.GetCurrentUser();
+        if(string.IsNullOrEmpty(entity.CreatedBy))
+        {
+            entity.CreatedBy = _auditInfoProvider.GetCurrentUser();
+        }
         await _collection.InsertOneAsync(entity);
         return entity;
     }
@@ -129,6 +132,10 @@ public class MongoRepository<T> : IRepository<T> where T : BaseEntity
     public virtual T Update(T entity)
     {
         entity.UpdatedOnUtc = _auditInfoProvider.GetCurrentDateTime();
+        if(string.IsNullOrEmpty(entity.UpdatedBy))
+        {
+            entity.UpdatedBy = _auditInfoProvider.GetCurrentUser();
+        }
         entity.UpdatedBy = _auditInfoProvider?.GetCurrentUser();
         _collection.ReplaceOne(x => x.Id == entity.Id, entity, new ReplaceOptions { IsUpsert = false });
         return entity;
