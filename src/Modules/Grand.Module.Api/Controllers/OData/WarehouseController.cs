@@ -1,18 +1,22 @@
-﻿using Grand.Module.Api.DTOs.Shipping;
-using Grand.Module.Api.Queries.Models.Common;
-using Grand.Business.Core.Interfaces.Common.Security;
+﻿using Grand.Business.Core.Interfaces.Common.Security;
 using Grand.Domain.Permissions;
 using Grand.Domain.Shipping;
+using Grand.Module.Api.Commands.Models.Warehouse;
+using Grand.Module.Api.Constants;
+using Grand.Module.Api.DTOs.Shipping;
+using Grand.Module.Api.Infrastructure.Extensions;
+using Grand.Module.Api.Queries.Models.Common;
+
 using MediatR;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+
 using MongoDB.AspNetCore.OData;
+
 using Swashbuckle.AspNetCore.Annotations;
+
 using System.Net;
-using Grand.Module.Api.Constants;
-using Grand.Module.Api.Commands.Models.Store;
-using Grand.Module.Api.DTOs.Common;
-using Grand.Module.Api.Commands.Models.Warehouse;
 
 namespace Grand.Module.Api.Controllers.OData;
 
@@ -64,6 +68,7 @@ public class WarehouseController : BaseODataController
     public async Task<IActionResult> Post([FromBody] WarehouseDto model)
     {
         if (!await _permissionService.Authorize(PermissionSystemName.ShippingSettings)) return Forbid();
+        model = model.Bind();
         model = await _mediator.Send(new AddWarehouseCommand { Model = model });
         return Ok(model);
     }

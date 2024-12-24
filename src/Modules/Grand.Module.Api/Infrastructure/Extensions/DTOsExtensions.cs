@@ -1,4 +1,5 @@
 ﻿using Grand.Module.Api.DTOs.Common;
+using Grand.Module.Api.DTOs.Shipping;
 
 using Microsoft.AspNetCore.Http;
 
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Grand.Module.Api.Infrastructure.Extensions
 {
-    public static class FieldsExtensions
+    public static class DTOsExtensions
     {
         /// <summary>
         /// Return Host with scheme with an trailing slash like https://www.mysite.com/
@@ -30,11 +31,11 @@ namespace Grand.Module.Api.Infrastructure.Extensions
         /// <param name="httpRequest"></param>
         /// <param name="clinicName"></param>
         /// <returns></returns>
-        public static StoreDto ManageClinicConfigurations(HttpRequest httpRequest, StoreDto store)
+        public static StoreDto Bind(this StoreDto store, HttpRequest httpRequest)
         {
 
             // Ensure the clinic name is valid for a subdomain
-            var safeClinicName = GetSafeSubdomain(store.Name);
+            var safeClinicName = GetSafeName(store.Name);
             store.Shortcut = safeClinicName;
             store.Url = $"{httpRequest.Scheme}://{safeClinicName}.{httpRequest.Host.Value}/";
             if (httpRequest.Scheme == "https")
@@ -48,12 +49,19 @@ namespace Grand.Module.Api.Infrastructure.Extensions
             return store;
         }
 
+        public static WarehouseDto Bind(this WarehouseDto warehouse)
+        {
+            warehouse.Name = $"{GetSafeName(warehouse.Name)}-warehouse";
+            warehouse.Code = $"{GetSafeName(warehouse.Name).ToUpper()}-WH";
+            return warehouse;
+        }
+
         /// <summary>
         /// Ensures the provided string is a valid subdomain
         /// </summary>
         /// <param name="subdomain"></param>
         /// <returns></returns>
-        private static string GetSafeSubdomain(string subdomain)
+        private static string GetSafeName(string subdomain)
         {
             // Convert to lowercase
             subdomain = subdomain.ToLowerInvariant();

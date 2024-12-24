@@ -66,7 +66,7 @@ public class StoreController : BaseODataController
     public async Task<IActionResult> Post([FromBody] StoreDto model)
     {
         //Assign the host and store url
-        model = FieldsExtensions.ManageClinicConfigurations(HttpContext.Request, model);
+        model.Bind(HttpContext.Request);
         if (!await _permissionService.Authorize(PermissionSystemName.Stores)) return Forbid();
         model = await _mediator.Send(new AddStoreCommand { Model = model });
         return Ok(model);
