@@ -10,6 +10,9 @@ using MongoDB.AspNetCore.OData;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using Grand.Module.Api.Constants;
+using Grand.Module.Api.Commands.Models.Store;
+using Grand.Module.Api.DTOs.Common;
+using Grand.Module.Api.Commands.Models.Warehouse;
 
 namespace Grand.Module.Api.Controllers.OData;
 
@@ -51,5 +54,17 @@ public class WarehouseController : BaseODataController
         if (!await _permissionService.Authorize(PermissionSystemName.ShippingSettings)) return Forbid();
 
         return Ok(await _mediator.Send(new GetGenericQuery<WarehouseDto, Warehouse>()));
+    }
+
+    [SwaggerOperation("Adds a new Warehouse", OperationId = "InsertWarehouse")]
+    [HttpPost]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> Post([FromBody] WarehouseDto model)
+    {
+        if (!await _permissionService.Authorize(PermissionSystemName.ShippingSettings)) return Forbid();
+        model = await _mediator.Send(new AddWarehouseCommand { Model = model });
+        return Ok(model);
     }
 }

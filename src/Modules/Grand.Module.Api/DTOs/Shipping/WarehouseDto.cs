@@ -5,5 +5,6 @@ namespace Grand.Module.Api.DTOs.Shipping;
 public class WarehouseDto : BaseApiEntityModel
 {
     public string Name { get; set; }
+    public string Code { get; set; }
     public string AdminComment { get; set; }
 }

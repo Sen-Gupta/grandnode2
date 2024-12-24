@@ -6,6 +6,9 @@ using Grand.Domain.Common;
 using Grand.Domain.Customers;
 using Grand.Domain.Media;
 using Grand.Infrastructure.Mapper;
+using Grand.Domain.Stores;
+using Grand.Module.Api.DTOs.Shipping;
+using Grand.Domain.Shipping;
 
 namespace Grand.Module.Api.Extensions;
 
@@ -229,5 +232,39 @@ public static class MappingExtensions
         return model.MapTo(destination);
     }
 
+    #endregion
+
+    #region Store
+    public static StoreDto ToModel(this Store entity)
+    {
+        return entity.MapTo<Store, StoreDto>();
+    }
+
+    public static Store ToEntity(this StoreDto model)
+    {
+        return model.MapTo<StoreDto, Store>();
+    }
+
+    public static Store ToEntity(this StoreDto model, Store destination)
+    {
+        return model.MapTo(destination);
+    }
+    #endregion
+
+    #region Warehouse
+    public static WarehouseDto ToModel(this Warehouse entity)
+    {
+        return entity.MapTo<Warehouse, WarehouseDto>();
+    }
+
+    public static Warehouse ToEntity(this WarehouseDto model)
+    {
+        return model.MapTo<WarehouseDto, Warehouse>();
+    }
+
+    public static Warehouse ToEntity(this WarehouseDto model, Warehouse destination)
+    {
+        return model.MapTo(destination);
+    }
     #endregion
 }
