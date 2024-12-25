@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
     <Import Project="..\..\Build\Grand.Common.props" />
     <PropertyGroup>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
@@ -27,7 +27,7 @@
 
     <Target Name="CopyFile" AfterTargets="AfterBuild">
         <ItemGroup>
-            <CopyFiles Include="$(NuGetPackageRoot)\stripe.net\47.2.0\lib\net9.0\*.*" />
+            <CopyFiles Include="$(NuGetPackageRoot)\stripe.net\47.2.0\lib\net8.0\*.dll" />
         </ItemGroup>
         <Copy SourceFiles="@(CopyFiles)" DestinationFolder="..\..\Web\Grand.Web\Plugins\Payments.StripeCheckout\" />
     </Target>
