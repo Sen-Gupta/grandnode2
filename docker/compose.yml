@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  biote-grandnode:
+    image: biote/grandnode:${TAG}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: biote-grandnode
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+      - ASPNETCORE_URLS=http://0.0.0.0:80 
+    ports:
+      - "9980:80"
+    volumes:
+      - /etc/ssl/certs:/https:ro
+      - biote_grandnode_data:/app/Web/Grand.Web/App_Data 
+    networks:
+      - biote
+
+networks:
+  biote:
+    external: true
+
+volumes:
+  biote_grandnode_data:
