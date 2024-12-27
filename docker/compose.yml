@@ -26,3 +26,4 @@ networks:
 
 volumes:
   biote_grandnode_data:
+  biote_grandnode_wwwroot:
