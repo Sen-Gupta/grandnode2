@@ -9,6 +9,8 @@ using Grand.Module.Api.Queries.Models.Common;
 
 using MediatR;
 
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 
@@ -70,6 +72,7 @@ public class WarehouseController : BaseODataController
         if (!await _permissionService.Authorize(PermissionSystemName.ShippingSettings)) return Forbid();
         model = model.Bind();
         model = await _mediator.Send(new AddWarehouseCommand { Model = model });
+        Response.Headers.Append("Location", $"{HttpContext.Request.GetUri()}/{model.Id}");
         return Ok(model);
     }
 }

@@ -13,6 +13,7 @@ using Grand.Module.Api.Constants;
 using Grand.Module.Api.Commands.Models.Store;
 using Grand.Module.Api.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 
 namespace Grand.Module.Api.Controllers.OData;
 
@@ -69,6 +70,8 @@ public class StoreController : BaseODataController
         model.Bind(HttpContext.Request);
         if (!await _permissionService.Authorize(PermissionSystemName.Stores)) return Forbid();
         model = await _mediator.Send(new AddStoreCommand { Model = model });
+        //Add Location from request host
+        Response.Headers.Append("Location", $"{HttpContext.Request.GetUri()}/{model.Id}");
         return Ok(model);
     }
 }

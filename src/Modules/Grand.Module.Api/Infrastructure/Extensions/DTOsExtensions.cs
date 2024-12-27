@@ -51,8 +51,9 @@ namespace Grand.Module.Api.Infrastructure.Extensions
 
         public static WarehouseDto Bind(this WarehouseDto warehouse)
         {
-            warehouse.Name = $"{GetSafeName(warehouse.Name)}-warehouse";
-            warehouse.Code = $"{GetSafeName(warehouse.Name).ToUpper()}-WH";
+            var safeName = GetSafeName(warehouse.Name);
+            warehouse.Name = $"{safeName}-warehouse";
+            warehouse.Code = $"{safeName.ToUpper()}-WH";
             return warehouse;
         }
 
