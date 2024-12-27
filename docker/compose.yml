@@ -15,7 +15,8 @@ services:
       - "9980:80"
     volumes:
       - /etc/ssl/certs:/https:ro
-      - biote_grandnode_data:/app/Web/Grand.Web/App_Data 
+      - biote_grandnode_data:/app/App_Data
+      - biote_grandnode_wwwroot:/app/wwwroot 
     networks:
       - biote
 
