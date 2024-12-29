@@ -32,6 +32,7 @@ public class StoreController : BaseODataController
 
     [SwaggerOperation("Get entity from Store by key", OperationId = "GetStoreById")]
     [HttpGet("{key}")]
+    [HttpGet("/odata/Store({key})")]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -62,7 +63,7 @@ public class StoreController : BaseODataController
     [SwaggerOperation("Adds a new store", OperationId = "InsertStore")]
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Post([FromBody] StoreDto model)
     {
@@ -70,8 +71,6 @@ public class StoreController : BaseODataController
         model.Bind(HttpContext.Request);
         if (!await _permissionService.Authorize(PermissionSystemName.Stores)) return Forbid();
         model = await _mediator.Send(new AddStoreCommand { Model = model });
-        //Add Location from request host
-        Response.Headers.Append("Location", $"{HttpContext.Request.GetUri()}/{model.Id}");
-        return Ok(model);
+        return Created(model);
     }
 }

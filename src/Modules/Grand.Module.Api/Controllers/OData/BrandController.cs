@@ -41,6 +41,7 @@ public class BrandController : BaseODataController
 
     [SwaggerOperation("Get entity from Brand by key", OperationId = "GetBrandById")]
     [HttpGet("{key}")]
+    [HttpGet("/odata/Brand({key})")]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -57,14 +58,14 @@ public class BrandController : BaseODataController
     [SwaggerOperation("Add new entity to Brand", OperationId = "InsertBrand")]
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Post([FromBody] BrandDto model)
     {
         if (!await _permissionService.Authorize(PermissionSystemName.Brands)) return Forbid();
 
         model = await _mediator.Send(new AddBrandCommand { Model = model });
-        return Ok(model);
+        return Created(model);
     }
 
     [SwaggerOperation("Update entity in Brand", OperationId = "UpdateBrand")]

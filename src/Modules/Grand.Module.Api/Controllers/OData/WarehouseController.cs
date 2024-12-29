@@ -9,8 +9,6 @@ using Grand.Module.Api.Queries.Models.Common;
 
 using MediatR;
 
-using Microsoft.ApplicationInsights.AspNetCore.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 
@@ -37,6 +35,7 @@ public class WarehouseController : BaseODataController
 
     [SwaggerOperation("Get entity from Warehouse by key", OperationId = "GetWarehouseById")]
     [HttpGet("{key}")]
+    [HttpGet("/odata/Warehouse({key})")]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -50,29 +49,16 @@ public class WarehouseController : BaseODataController
         return Ok(warehouse.FirstOrDefault());
     }
 
-    [SwaggerOperation("Get entities from Warehouse", OperationId = "GetWarehouses")]
-    [HttpGet]
-    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
-    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Get()
-    {
-        if (!await _permissionService.Authorize(PermissionSystemName.ShippingSettings)) return Forbid();
-
-        return Ok(await _mediator.Send(new GetGenericQuery<WarehouseDto, Warehouse>()));
-    }
-
     [SwaggerOperation("Adds a new Warehouse", OperationId = "InsertWarehouse")]
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Post([FromBody] WarehouseDto model)
     {
         if (!await _permissionService.Authorize(PermissionSystemName.ShippingSettings)) return Forbid();
         model = model.Bind();
         model = await _mediator.Send(new AddWarehouseCommand { Model = model });
-        Response.Headers.Append("Location", $"{HttpContext.Request.GetUri()}/{model.Id}");
-        return Ok(model);
+        return Created(model);
     }
 }
