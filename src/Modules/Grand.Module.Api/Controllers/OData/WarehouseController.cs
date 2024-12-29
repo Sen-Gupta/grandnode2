@@ -33,6 +33,19 @@ public class WarehouseController : BaseODataController
         _permissionService = permissionService;
     }
 
+    [SwaggerOperation("Get entities from Warehouse", OperationId = "GetWarehouses")]
+    [HttpGet]
+    [MongoEnableQuery(HandleNullPropagation = HandleNullPropagationOption.False)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Get()
+    {
+        if (!await _permissionService.Authorize(PermissionSystemName.ShippingSettings)) return Forbid();
+
+        return Ok(await _mediator.Send(new GetGenericQuery<WarehouseDto, Warehouse>()));
+    }
+
+
     [SwaggerOperation("Get entity from Warehouse by key", OperationId = "GetWarehouseById")]
     [HttpGet("{key}")]
     [HttpGet("/odata/Warehouse({key})")]
