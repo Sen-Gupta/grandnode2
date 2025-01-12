@@ -56,7 +56,7 @@ public class WarehouseController : BaseApiController
 
 
     [EndpointDescription("Add new entity to Warehouse")]
-    [EndpointName("InsertBrand")]
+    [EndpointName("InsertWarehouse")]
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseDto))]
