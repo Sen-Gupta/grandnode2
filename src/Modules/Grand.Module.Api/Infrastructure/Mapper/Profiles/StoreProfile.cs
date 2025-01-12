@@ -23,11 +23,8 @@ public class StoreProfile : Profile, IAutoMapperProfile
             .ForMember(dest => dest.CompanyHours, mo => mo.Ignore())
             .ForMember(dest => dest.BankAccount, mo => mo.Ignore())
             .ForMember(dest => dest.Locales, mo => mo.Ignore())
-            
             .ForMember(dest => dest.CreatedOnUtc, mo => mo.Ignore())
             .ForMember(dest => dest.UpdatedOnUtc, mo => mo.Ignore())
-            .ForMember(dest => dest.CreatedBy, mo => mo.Ignore())
-            .ForMember(dest => dest.UpdatedBy, mo => mo.Ignore())
             .ForMember(dest => dest.UserFields, mo => mo.Ignore());
 
         CreateMap<Store, StoreDto>()
