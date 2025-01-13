@@ -5,6 +5,7 @@ using Grand.Module.Api.Attributes;
 using Grand.Module.Api.Commands.Models.Catalog;
 using Grand.Module.Api.Commands.Models.Warehouse;
 using Grand.Module.Api.DTOs.Shipping;
+using Grand.Module.Api.Infrastructure.Extensions;
 using Grand.Module.Api.Queries.Models.Common;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -64,7 +65,7 @@ public class WarehouseController : BaseApiController
     public async Task<IActionResult> Post([FromBody] WarehouseDto model)
     {
         if (!await _permissionService.Authorize(PermissionSystemName.Brands)) return Forbid();
-
+        model = model.Bind();
         model = await _mediator.Send(new AddWarehouseCommand { Model = model });
         return Ok(model);
     }

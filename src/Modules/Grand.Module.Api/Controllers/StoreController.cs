@@ -4,6 +4,7 @@ using Grand.Domain.Stores;
 using Grand.Module.Api.Attributes;
 using Grand.Module.Api.Commands.Models.Store;
 using Grand.Module.Api.DTOs.Common;
+using Grand.Module.Api.Infrastructure.Extensions;
 using Grand.Module.Api.Queries.Models.Common;
 
 using MediatR;
@@ -65,7 +66,7 @@ public class StoreController : BaseApiController
     public async Task<IActionResult> Post([FromBody] StoreDto model)
     {
         if (!await _permissionService.Authorize(PermissionSystemName.Brands)) return Forbid();
-
+        model = model.Bind(Request);
         model = await _mediator.Send(new AddStoreCommand { Model = model });
         return Ok(model);
     }
