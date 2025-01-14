@@ -36,7 +36,7 @@ public class CustomerController : BaseApiController
 
     [EndpointDescription("Get entity from Customer by email")]
     [EndpointName("GetCustomerByEmail")]
-    [HttpGet]
+    [HttpGet("{email}")]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CustomerDto))]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -45,6 +45,22 @@ public class CustomerController : BaseApiController
         if (!await _permissionService.Authorize(PermissionSystemName.Customers)) return Forbid();
 
         var customer = await _mediator.Send(new GetCustomerQuery { Email = email });
+        if (customer == null) return NotFound();
+
+        return Ok(customer);
+    }
+
+    [EndpointDescription("Get entity from Customer by Phone")]
+    [EndpointName("GetCustomerByPhone")]
+    [HttpGet("by/{phone}")]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CustomerDto))]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> GetByPhone([FromRoute] string phone)
+    {
+        if (!await _permissionService.Authorize(PermissionSystemName.Customers)) return Forbid();
+
+        var customer = await _mediator.Send(new GetCustomerByPhoneQuery { Phone = phone });
         if (customer == null) return NotFound();
 
         return Ok(customer);

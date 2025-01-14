@@ -125,6 +125,13 @@ public interface ICustomerService
     Task<Customer> GetCustomerByUsername(string username);
 
     /// <summary>
+    /// Get customer by Phone
+    /// </summary>
+    /// <param name="phone"></param>
+    /// <returns></returns>
+    Task<Customer> GetCustomerByPhone(string phone);
+
+    /// <summary>
     ///     Insert a guest customer
     /// </summary>
     /// <returns>Customer</returns>

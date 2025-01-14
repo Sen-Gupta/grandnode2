@@ -258,6 +258,18 @@ public class CustomerService : ICustomerService
     }
 
     /// <summary>
+    ///    Get customer by SSN
+    /// </summary>
+    /// <param name="phone"></param>
+    /// <returns></returns>
+    public virtual async Task<Customer> GetCustomerByPhone(string phone)
+    {
+        if (string.IsNullOrWhiteSpace(phone))
+            return null;
+        return await _customerRepository.GetOneAsync(x => x.Addresses.Any(y => y.PhoneNumber == phone));
+    }
+
+    /// <summary>
     ///     Insert a guest customer
     /// </summary>
     /// <returns>Customer</returns>

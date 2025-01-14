@@ -16,6 +16,7 @@ public class CustomerDto : BaseApiEntityModel
     public string AffiliateId { get; set; }
     public string VendorId { get; set; }
     public string StoreId { get; set; }
+    public string StaffStoreId { get; set; }
     public bool Active { get; set; }
     public bool Deleted { get; set; }
     public string Gender { get; set; }
