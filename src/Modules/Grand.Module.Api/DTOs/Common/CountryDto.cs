@@ -23,6 +23,7 @@ public class CountryDto : BaseApiEntityModel
 
     public class StateProvinceDto
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Abbreviation { get; set; }
         public bool Published { get; set; }
